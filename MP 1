@@ -1,0 +1,155 @@
+#include <iostream>
+//For the computing higher maths
+#include <cmath>
+//For including string inputs
+#include <cstring>
+
+using namespace std;
+
+int main()
+{
+	//Array strings
+	string fName[50], lName[50], name[50], stat[50];
+	
+	//Double integers
+	double i, e, prelim, final, EXP[9], ST[9], MP[9], sumEXP[50], sumST[50], sumMP[50], sumPE[50], sumFE[50], epEXP[50], epST[50], epMP[50], epME[50], epGrade[50];
+	
+	//Float integers
+	float trans[50];
+	
+	
+	cout << "\t\t\tElectronic Class Record\n" << endl;
+	cout << "Enter 50 student's names: \n" << endl;
+	
+	//Loop for number of student
+	for(int x = 1; x < 51; x++){
+		cout << "Student " << x << ": " << endl;
+		
+		//cin.getline for the first and last name of the student
+		cout << "First name: ";
+		cin >> fName[x];
+		cout << "Last name: ";
+		cin >> lName[x];
+		name[x] = fName[x] + " " + lName[x];
+		
+		cout << "\n"; 
+		
+		cout << "------------Enter Grades------------" << endl;
+		
+		//Loop for number of experiments
+		{
+			for(int exp = 1; exp < 10; exp++){
+				cout << "Experiment " << exp << ": ";
+				cin >> EXP[exp];
+				sumEXP[x] += EXP[exp];
+			}
+			
+			//Formula for the evaluated grade of experiments
+			epEXP[x] = (sumEXP[x] / 9) * 0.10;
+			
+			//Loop for number of skills test
+			for(int skill = 1; skill < 10; skill++){
+				cout << "Skills test " << skill << ": ";
+				cin >> ST[skill];
+				sumST[x] += ST[skill];
+			}
+			
+			//Formula for the evaluated grade of skills tests
+			epST[x] = (sumST[x] / 9) * 0.20;
+			
+			//Loop number fo skills test
+			for(int mp = 1; mp < 3; mp++){
+				cout << "Machine problem " << mp << ": ";
+				cin >> MP[mp];
+				sumMP[x] += MP[mp];
+			}
+			
+			//Formula for the evaluated grade of machine problems
+			epMP[x] = (sumMP[x]/ 2) * 0.20;
+			
+			{
+				//cin for prelimenary exam grade
+				cout << "Major Examinations:" << endl;
+				cout << "Preliminary Examinations: ";
+				cin >> prelim;
+				{
+					sumPE[x] += prelim;
+				}
+				
+				//cin for final exam grade
+				cout << "Finals Examinations: ";
+				cin >> final;
+				{
+					sumFE[x] += final;
+				}
+				epME[x] = (sumPE[x] * .20) + (sumFE[x] * .30);
+				cout << "\n";
+			}		
+			
+		}
+		//Tranlation of raw grade
+		epGrade[x] = epEXP[x] + epST[x] + epMP[x] + epME[x];
+		cout << "---------------------------------------------------------" << endl;
+		if(epGrade[x] < 60){
+			trans[x] = 5.00;
+		}else if(epGrade[x] >= 60 && epGrade[x] <= 64.44){
+			trans[x] = 3.00;
+		}else if(epGrade[x] >= 64.45 && epGrade[x] <=68.89){
+			trans[x] = 2.75;
+		}else if(epGrade[x] >= 68.90 && epGrade[x] <= 73.33){
+			trans[x] = 2.50;
+		}else if(epGrade[x] >= 73.34 && epGrade[x] <= 77.78){
+			trans[x] = 2.25;
+		}else if(epGrade[x] >= 77.79 && epGrade[x] <= 82.22){
+			trans[x] = 2.00;
+		}else if(epGrade[x] >= 82.23 && epGrade[x] <= 86.67){
+			trans[x] = 1.75;
+		}else if(epGrade[x] >= 86.68 && epGrade[x] <= 91.11){
+			trans[x] = 1.50;
+		}else if(epGrade[x] >= 91.12 && epGrade[x] <= 95.56){
+			trans[x] = 1.25;
+		}else if(epGrade[x] >= 95.57 && epGrade[x] <= 100){
+			trans[x] = 1.00;
+		}
+		
+		//Classifying the status, whether the student passed or failed
+		if(epGrade[x] < 60){
+			stat[x] = "Failed";
+		}else{
+			stat[x] = "Passed";
+		}
+		
+	}
+	
+	//cout of grades
+	cout << "\n-------------Grades-------------" << endl;
+	cout << "Name\t\t\tGrade\t\tStatus" << endl;
+	
+	//cout of the student, translation of grade, and status
+	for(int a = 1; a < 11; a++){
+		cout << name[a] << "\t\t" << trans[a] << "\t\t" << stat[a] << endl;
+	}
+	
+	//Sorting the top 10 of the class
+	for(int b = 1; b < 11; b++){
+		for(int d = 1; d < 11; d++){
+			if(trans[d] > trans[d + 1]){
+				e = trans[d];
+				trans[d] = trans[d +1];
+				trans[d + 1] = e;
+			}
+		}
+	}
+	
+	//cout of ranking
+	cout << "\n-------------Ranking-------------" << endl;
+	cout << "Rank\t\tName\t\tGrade" << endl;
+	
+	//cout of the sorted name with translation of grade
+	for(int y = 1; y < 11; y++){
+		cout << y << "\t\t" << name[y] << "\t" << trans[y] << endl;
+	}
+	
+	return 0;
+	
+}
