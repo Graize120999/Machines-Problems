@@ -1,0 +1,80 @@
+#include <iostream>
+//For the computing higher maths
+#include <cmath>
+#include <math.h>
+
+using namespace std;
+
+int main()
+{
+	//Use double for decimal numbers
+	double a, b, c, S, area, perimeter, cA, cB, 
+	cC, acA, acB, acC, circumcenter, apothem;
+	
+	//Asking for the measurements of the sides
+	cout << "Enter the sides of the triangle:" << endl;
+	cout << "Side a: ";
+	cin >> a;
+	cout << "Side b: ";
+	cin >> b;
+	cout << "Side c: ";
+	cin >> c;
+	
+	//Formula for the Perimeter
+	perimeter = a + b + c;
+	
+	//Heron's formula, to solve the area using SSS theorem
+	S = (a + b + c) / 2;
+	
+	//Formula for the Area
+	area = sqrt((S * (S - a)*(S - b) * (S - c)));
+	
+	//Formula for the kinds of Angles 
+	cA = (pow(b, 2) + pow(c, 2) - pow(a, 2)) / (2 * b *c);
+	cB = (pow(c, 2) + pow(a, 2) - pow(b, 2)) / (2 * c *a);
+	cC = (pow(a, 2) + pow(b, 2) - pow(c, 2)) / (2 * a *b);
+	
+	//Formula for the interior angles
+	acA = acos(cA) * 180/3.141592;
+	acB = acos(cB) * 180/3.141592;
+	acC = acos(cC) * 180/3.141592;
+	
+	//cout for the interior angles 
+	cout << "\nVertice A interior angle: " << acA << endl;
+	cout << "Vertice B interior angle: " << acB << endl;
+	cout << "Vertice C interior angle: " << acC << endl;
+	
+	//Classifing whether the tringle is a scalene, an isosceles, or an equilateral.
+	if(a!=b && b!=c && c!=a){
+		cout << "\nThe triangle is a scalene tringle" << endl;	}
+	else if(a==b && b==c && c==a){
+		cout << "\nThe triangle is an equilateral triangle" << endl;}
+	else{
+		cout << "\nThe triangle is an isosceles triangle" << endl;}
+	
+	//cout of Area and Perimeter
+	cout << "Area: " << area << endl;
+	cout << "Perimeter: " << perimeter << endl;
+	
+	//Classifing whether the tringle is an acute triangle, a right triangle, or an obtuse triangle.
+	if(cA < 90 && cB < 90 && cC < 90){
+		cout << "The triangle is an acute triangle" << endl;}
+		else if(cA==90 || cB==90 || cC==90){
+		cout << "The triangle is a right triangle" << endl;}
+	else if(cA > 90 || cB > 90 || cC > 90){
+		cout << "The triangle is an obtuse triangle" << endl;}
+	
+	//If the triangle is an equilateral, it will show its circumcenter.
+	if(a==b && b==c && c==a){
+		apothem = (a / 2) * sqrt(3);
+		circumcenter = (a*sqrt(3)) / 3;
+		cout << "\nThe triangle is equilateral!" << endl;
+		cout << "Apothem: " << apothem << endl;
+		cout << "Circumcenter: " << circumcenter << endl;}
+	else{
+		// When the tringle is not an equilaterar, there would not be a circumcenter
+		cout << "The triangle is not equilateral, thus there is no circumcenter" << endl;}
+	
+	return 0;
+	
+}
